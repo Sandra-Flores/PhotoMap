@@ -12,6 +12,7 @@ import UIKit
 // Protocol definition - top of LocationsViewController.swift
 protocol LocationsViewControllerDelegate : class {
     func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber)
+    
 }
 
 class LocationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
@@ -21,6 +22,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     let CLIENT_SECRET = "W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH21ZCPUMCU"
 
     weak var delegate: LocationsViewControllerDelegate!
+    var selectedImage : UIImage?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!

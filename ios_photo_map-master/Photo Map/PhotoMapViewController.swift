@@ -6,6 +6,8 @@
 //  Copyright © 2015 Timothy Lee. All rights reserved.
 //
 
+// TODO: LEFT OFF ON EXTENSION
+
 import UIKit
 import MapKit
 
@@ -13,6 +15,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
 
 
     @IBOutlet weak var mapView: MKMapView!
+    var selectedImage : UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +26,6 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         let sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(37.783333, -122.416667),
                                               MKCoordinateSpanMake(0.1, 0.1))
         mapView.setRegion(sfRegion, animated: false)
-        
-        
     }
 
     @IBAction func whenCameraPressed(_ sender: Any) {
@@ -58,7 +59,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         
         
         // go to next view controller
-        performSegue(withIdentifier: "tagSegue", sender: self)
+        self.performSegue(withIdentifier: "tagSegue", sender: self)
 
         // Dismiss UIImagePickerController to go back to your original view controller
         dismiss(animated: true, completion: nil)
@@ -78,7 +79,24 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "tagSegue" {
+            let locationVC = segue.destination as! LocationsViewController
+            locationVC.delegate = self as! LocationsViewControllerDelegate
+            locationVC.selectedImage = selectedImage
+        }
     }
-    
 
+}
+
+
+extension PhotoMapViewController : LocationViewControllerDelegate {
+    func locationPickedLocation(controller: LocationsViewController, lat: NSNumber, lon: NSNumber) {
+        
+        let pinPoint = MKPointAnnotation()
+        pinPoint.coordinate = CLLocationCoordinate2D(latitude: lat.doubleValue, longitude: lon.doubleValue)
+        pinPoint.title = "Picture"
+        mapView.addAnnotation(pinPoint)
+        
+        self.navigationController?.popToViewController(self, animated: true)
+    }
 }
