@@ -92,7 +92,7 @@ extension PhotoMapViewController : LocationsViewControllerDelegate {
         
         let pinPoint = MKPointAnnotation()
         pinPoint.coordinate = CLLocationCoordinate2D(latitude: latitude.doubleValue, longitude: longitude.doubleValue)
-        pinPoint.title = "Picture"
+        pinPoint.title = "\(latitude), \(longitude)"
         mapView.addAnnotation(pinPoint)
         mapView.delegate = self
         
