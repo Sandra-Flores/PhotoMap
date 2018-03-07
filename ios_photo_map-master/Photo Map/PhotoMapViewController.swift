@@ -82,6 +82,10 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
             locationVC.delegate = self as! LocationsViewControllerDelegate
             locationVC.selectedImage = selectedImage
         }
+        else{
+            let locationVC = segue.destination as! FullImageViewController
+            locationVC.selectedImage = selectedImage
+        }
     }
 
 }
@@ -113,11 +117,22 @@ extension PhotoMapViewController : MKMapViewDelegate {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             annotationView!.canShowCallout = true
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+            annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
         }
         
+        // left
         let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
         imageView.image = selectedImage
+
         
         return annotationView
     }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            
+            self.performSegue(withIdentifier: "fullImageSegue", sender: self)
+        }
+    }
+    
 }
