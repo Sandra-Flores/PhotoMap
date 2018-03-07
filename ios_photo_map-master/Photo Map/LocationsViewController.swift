@@ -10,7 +10,7 @@ import UIKit
 
 
 // Protocol definition - top of LocationsViewController.swift
-protocol LocationsViewControllerDelegate : class {
+@objc protocol LocationsViewControllerDelegate : class {
     func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber)
     
 }

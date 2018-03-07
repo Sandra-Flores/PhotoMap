@@ -6,8 +6,6 @@
 //  Copyright © 2015 Timothy Lee. All rights reserved.
 //
 
-// TODO: LEFT OFF ON EXTENSION
-
 import UIKit
 import MapKit
 
@@ -89,14 +87,14 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
 }
 
 
-extension PhotoMapViewController : LocationViewControllerDelegate {
-    func locationPickedLocation(controller: LocationsViewController, lat: NSNumber, lon: NSNumber) {
-        
+extension PhotoMapViewController : LocationsViewControllerDelegate {
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
         let pinPoint = MKPointAnnotation()
-        pinPoint.coordinate = CLLocationCoordinate2D(latitude: lat.doubleValue, longitude: lon.doubleValue)
+        pinPoint.coordinate = CLLocationCoordinate2D(latitude: latitude.doubleValue, longitude: longitude.doubleValue)
         pinPoint.title = "Picture"
         mapView.addAnnotation(pinPoint)
         
         self.navigationController?.popToViewController(self, animated: true)
     }
+
 }
