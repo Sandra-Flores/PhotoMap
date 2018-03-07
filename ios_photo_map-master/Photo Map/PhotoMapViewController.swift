@@ -54,7 +54,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         // Do something with the images (based on your use case)
-        
+        selectedImage = editedImage
         
         // go to next view controller
         self.performSegue(withIdentifier: "tagSegue", sender: self)
@@ -89,6 +89,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
 
 extension PhotoMapViewController : LocationsViewControllerDelegate {
     func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+        
         let pinPoint = MKPointAnnotation()
         pinPoint.coordinate = CLLocationCoordinate2D(latitude: latitude.doubleValue, longitude: longitude.doubleValue)
         pinPoint.title = "Picture"
@@ -97,4 +98,24 @@ extension PhotoMapViewController : LocationsViewControllerDelegate {
         self.navigationController?.popToViewController(self, animated: true)
     }
 
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseID = "myAnnotationView"
+        
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
+        
+        if (annotationView == nil) {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+            annotationView!.canShowCallout = true
+            annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+        }
+        
+        let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
+        imageView.image = UIImage(named: "camera")
+        
+        return annotationView
+    }
+    
+    
 }
