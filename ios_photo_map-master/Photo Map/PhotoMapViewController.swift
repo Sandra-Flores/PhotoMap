@@ -94,12 +94,16 @@ extension PhotoMapViewController : LocationsViewControllerDelegate {
         pinPoint.coordinate = CLLocationCoordinate2D(latitude: latitude.doubleValue, longitude: longitude.doubleValue)
         pinPoint.title = "Picture"
         mapView.addAnnotation(pinPoint)
+        mapView.delegate = self
         
         self.navigationController?.popToViewController(self, animated: true)
     }
-
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+}
+
+extension PhotoMapViewController : MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseID = "myAnnotationView"
         
@@ -112,10 +116,8 @@ extension PhotoMapViewController : LocationsViewControllerDelegate {
         }
         
         let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
-        imageView.image = UIImage(named: "camera")
+        imageView.image = selectedImage
         
         return annotationView
     }
-    
-    
 }
