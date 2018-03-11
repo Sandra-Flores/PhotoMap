@@ -33,6 +33,8 @@ Here's a walkthrough of implemented user stories:
 
 Link to gif -> https://i.imgur.com/657BfQK.gif
 
+[Imgur](https://i.imgur.com/657BfQK.gifv)
+
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
