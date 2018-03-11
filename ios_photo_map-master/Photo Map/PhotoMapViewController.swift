@@ -123,7 +123,6 @@ extension PhotoMapViewController : MKMapViewDelegate {
         // left
         let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
         imageView.image = selectedImage
-
         
         return annotationView
     }
