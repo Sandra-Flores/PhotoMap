@@ -33,8 +33,6 @@ Here's a walkthrough of implemented user stories:
 
 Link to gif -> https://i.imgur.com/657BfQK.gif
 
-[Imgur](https://i.imgur.com/657BfQK.gifv)
-
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
@@ -43,7 +41,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [2018] [Diego Medina]
+    Copyright [2018] [Sandra Flores]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
